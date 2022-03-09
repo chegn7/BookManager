@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.BookManager.dao.BookDao">
+    <resultMap id="BookResult" type="com.example.BookManager.model.Book">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="author" column="author"></result>
+        <result property="price" column="price"></result>
+    </resultMap>
+
+    <insert id="addBook" parameterType="com.example.BookManager.model.Book">
+        insert into book (name, author, price)
+        values (#{name}, #{author}, #{price})
+    </insert>
+    <select id="selectById" resultMap="BookResult">
+        select name, author, price, status
+        from book
+        where id = #{id}
+    </select>
+    <select id="selectByName" resultMap="BookResult">
+        select name, author, price, status
+        from book
+        where name = #{name}
+    </select>
+    <select id="selectAll" resultMap="BookResult">
+        select name, author, price, status
+        from book;
+    </select>
+</mapper>
